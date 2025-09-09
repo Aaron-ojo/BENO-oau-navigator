@@ -1,0 +1,276 @@
+/* RESET / BASE */
+body {
+  min-height: 100vh;
+  margin: 0;
+  background-color: #F6F7FB;
+  font-family: 'Lucida Sans', sans-serif;
+}
+
+/* HEADER */
+.header {
+  width: 100%;
+  height: 72px;
+  background-color: #0B1F3B;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logo {
+  width: 40px;
+  height: 40px;
+}
+
+.logo-title {
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.navbar {
+  display: flex;
+  gap: 20px;
+}
+
+.home-button,
+.about-button {
+  color: #F6F7FB;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.home-button:hover,
+.about-button:hover {
+  color: gray;
+}
+
+/* TOP SECTION */
+.top-section {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.find {
+  font-weight: 500;
+}
+
+.enter {
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.search-bar {
+  flex: 3;           /* takes 3x more space */
+  min-width: 250px;  /* ensures it never gets too tiny */
+  height: 45px;
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  background-color: #F6F7FB;
+}
+
+.search-button {
+  flex: 1;           /* smaller ratio */
+  max-width: 150px;  /* cap the button width */
+  height: 45px;
+  margin-left: 10px;
+  background-color: #C99A2E;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight: 600;
+}
+
+
+.search-button:hover {
+  background-color: wheat;
+}
+
+.suggestions {
+  margin-top: 10px;
+  font-size: 0.85rem;
+}
+
+/* MIDDLE SECTION */
+.middle-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 90%;
+  max-width: 1200px;
+  margin: 30px auto;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.map-container{
+  flex: 1 1 45%;
+  min-width: 300px;
+  height: auto;
+  background-color: #F6F7FB;
+  border-radius: 25px;
+  padding: 20px;
+}
+
+.location-details{
+    flex: 1 1 45%;
+  min-width: 300px;
+  height: auto;
+  background-color: #F6F7FB;
+  border-radius: 25px;
+  padding: 20px;
+}
+
+.vector-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.route {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.step {
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+.open-button {
+  margin-top: 10px;
+  width: 160px;
+  height: 36px;
+  border-radius: 10px;
+  border: none;
+  background-color: #0B1F3B;
+  color: white;
+}
+
+.open-button:hover {
+  background-color: lightslategray;
+}
+
+/* FOOTER */
+.footer {
+  width: 100%;
+  height: 56px;
+  background-color: #0B1F3B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.designed {
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* DETAILS PAGE */
+.details {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+  background-color: #FFFFFF;
+  border-radius: 25px;
+  padding: 20px;
+}
+
+/* ABOUT PAGE TEXT */
+.aabout {
+  font-weight: 800;
+  text-decoration: underline;
+  font-size: 2rem;
+}
+
+.team {
+  margin-top: 20px;
+  text-decoration: underline;
+  font-size: 1.5rem;
+}
+
+.names {
+  margin-left: 20px;
+}
+
+/* The actual map element inside .map-container */
+.google-map {
+  width: 100%;
+  height: 300px; /* you can adjust */
+  border-radius: 12px;
+}
+
+
+/* 📱 MEDIA QUERIES */
+@media (max-width: 1024px) {
+  .header {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 10px;
+  }
+
+  .navbar {
+    margin-top: 10px;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo-title {
+    font-size: 0.9rem;
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+
+  .search-button {
+    margin: 10px 0 0 0;
+    width: 100%;
+  }
+
+  .middle-section {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo-title {
+    padding: 0;
+  }
+
+  .designed {
+    font-size: 0.75rem;
+    text-align: center;
+  }
+}
+
+/* AIzaSyDJz1mymVXlo5PKpjSX4ZCDm2tN9YIARw4 */
