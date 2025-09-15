@@ -1,7 +1,7 @@
 import { useState } from "react";
 import NavBar from "./NavBar";
 import MyMap from "./MyMap";
-import Search from "./Search"; // ✅ using the Search component
+import Search from "./search"; // ✅ using the Search component
 
 // All locations (shared with MyMap + Search)
 const locations = [
