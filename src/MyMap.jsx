@@ -25,7 +25,7 @@ const oauBounds = [
   [7.525, 4.535],
 ];
 
-// Routing component
+// Routing component (updates line when userLocation changes)
 const Routing = ({ userLocation, destination }) => {
   const map = useMap();
   const routingControlRef = useRef(null);
@@ -55,16 +55,13 @@ const Routing = ({ userLocation, destination }) => {
 const MyMap = ({ locations, setSelected, selectedLocation }) => {
   const [userLocation, setUserLocation] = useState(null);
   const [destination, setDestination] = useState(null);
-
-  // Keep track of marker references
   const markerRefs = useRef({});
 
-  // Get live location
+  // Continuously track user location
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
+      const watchId = navigator.geolocation.watchPosition(
         (pos) => {
-          console.log("Raw position:", pos.coords); // Debug output
           setUserLocation({
             lat: pos.coords.latitude,
             lng: pos.coords.longitude,
@@ -73,15 +70,17 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
         (err) => {
           console.error("Geolocation error:", err);
           alert("Unable to get precise location. Using default location.");
-          // Fallback to main gate if GPS fails
-          setUserLocation({ lat: 7.4985, lng: 4.5222 });
+          setUserLocation({ lat: 7.4985, lng: 4.5222 }); // fallback
         },
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
       );
+
+      // cleanup watcher on unmount
+      return () => navigator.geolocation.clearWatch(watchId);
     }
   }, []);
 
-  // Open marker popup automatically when a location is selected from search
+  // Open marker popup automatically when location selected from search
   useEffect(() => {
     if (selectedLocation && markerRefs.current[selectedLocation.name]) {
       markerRefs.current[selectedLocation.name].openPopup();
@@ -100,7 +99,7 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {/* User live location */}
+      {/* User live location marker */}
       {userLocation && (
         <Marker position={userLocation} icon={userIcon}>
           <Popup>You are here 📍</Popup>
@@ -136,6 +135,7 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
         </Marker>
       ))}
 
+      {/* Dynamic route */}
       {userLocation && destination && (
         <Routing userLocation={userLocation} destination={destination} />
       )}

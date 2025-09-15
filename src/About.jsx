@@ -22,59 +22,52 @@ function About() {
           <p className="built">
             Built by OAU students • 2025 • Motto: “For Learning and Culture”.
           </p>
-          <p className="team">Team</p>
-          <div className="team-grouping">
-            <p className="names">Araoye Ademolaro Precious</p>
-            <br />
-            <p className="names">Adejumo Adeyinka Mosope</p>
-            <br />
-            <p className="names">Agunbiade Boluwatife Favour</p>
-            <br />
-            <p className="names">Tunde-Lawal Boluwatife John</p>
-            <br />
-            <p className="names">Ojo Aaron Oloruntoba</p>
-            <br />
-          </div>
-          <div className="team-grouping">
-            <p className="names">Apara Victor Akinkunmi</p>
-            <br />
-            <p className="names">Osunmakinde Emmanuel Mercy</p>
-            <br />
-            <p className="names">Ibrahim Aishah Olohuntoki</p>
-            <br />
-            <p className="names">Ige King Oluwagbemisoke</p>
-            <br />
-            <p className="names">Akinleye Ayomide Victor</p>
-            <br />
-          </div>
-          <div className="team-grouping">
-            <p className="names">Adegbite Similoluwa Adebowale</p>
-            <br />
-            <p className="names">Ayantola Abdulaleem Akintoye</p>
-            <br />
-            <p className="names">Akinrodoye George Opeyemi</p>
-            <br />
-            <p className="names">Banjo Ayodeji Michael</p>
-            <br />
-            <p className="names">Ajibade Abiola James</p>
-            <br />
-          </div>
-          <div className="team-grouping">
-            <p className="names">Abass Olabiyi Nathaniel</p>
-            <br />
-            <p className="names">Faleti Oluwadamilola Esther</p>
-            <br />
-            <p className="names">Abiodun Oluwatimilehin Oluwole</p>
-            <br />
-            <p className="names">Fagbohun Oluwatunmise Ayanfeoluwa</p>
-            <br />
-          </div>
+          <p className="team">TEAM MEMBERS</p>
+          <p className="names">Araoye Ademolaro Precious</p>
+
+          <p className="names">Adejumo Adeyinka Mosope</p>
+
+          <p className="names">Agunbiade Boluwatife Favour</p>
+
+          <p className="names">Tunde-Lawal Boluwatife John</p>
+
+          <p className="names">Ojo Aaron Oloruntoba</p>
+          <p className="names">Apara Victor Akinkunmi</p>
+
+          <p className="names">Osunmakinde Emmanuel Mercy</p>
+
+          <p className="names">Ibrahim Aishah Olohuntoki</p>
+
+          <p className="names">Ige King Oluwagbemisoke</p>
+
+          <p className="names">Akinleye Ayomide Victor</p>
+
+          <p className="names">Adegbite Similoluwa Adebowale</p>
+
+          <p className="names">Ayantola Abdulaleem Akintoye</p>
+
+          <p className="names">Akinrodoye George Opeyemi</p>
+
+          <p className="names">Banjo Ayodeji Michael</p>
+
+          <p className="names">Ajibade Abiola James</p>
+
+          <p className="names">Abass Olabiyi Nathaniel</p>
+
+          <p className="names">Faleti Oluwadamilola Esther</p>
+
+          <p className="names">Abiodun Oluwatimilehin Oluwole</p>
+
+          <p className="names">Fagbohun Oluwatunmise Ayanfeoluwa</p>
         </div>
       </section>
 
       <footer>
         <div className="footer">
           <p className="designed">DESIGNED BY PART 2, GROUP 16 SWEP STUDENTS</p>
+          <a href="mailto: ojoaaron93@gmail.com" className="contact">
+            Contact
+          </a>
         </div>
       </footer>
     </main>

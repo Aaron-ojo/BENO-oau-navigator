@@ -245,21 +245,33 @@ body {
 
 .team {
   margin-top: 20px;
-  text-decoration: underline;
-  font-size: 1.5rem;
-  margin-left: 200px;
+  font-size: 2rem;
+  margin-left: 500px;
+  color: #C99A2E;
 }
 
-.team-grouping{
+.names{
   display: flex;
   border: 1px solid black;
   margin: 10px;
+  border-radius: 10px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
 }
 
-
-.names {
-  margin-left: 20px;
+.contact{
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin-left: 200px;
 }
+.contact:hover {
+  color: gray;
+}
+
 
 /* The actual map element inside .map-container */
 .google-map {
