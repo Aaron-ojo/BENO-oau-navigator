@@ -1,6 +1,7 @@
 import { useState } from "react";
 import NavBar from "./NavBar";
 import MyMap from "./MyMap";
+import Search from "./search";
 
 // All locations (shared with MyMap)
 const locations = [
@@ -52,16 +53,28 @@ const locations = [
 const Home = () => {
   const [searchInput, setSearchInput] = useState("");
   const [selected, setSelected] = useState(null);
+  const [suggestions, setSuggestions] = useState([]);
 
-  const handleSearch = () => {
-    const match = locations.find((loc) =>
-      loc.name.toLowerCase().includes(searchInput.toLowerCase())
-    );
-    if (match) {
-      setSelected(match); // show details
+  // Handle typing in the search bar
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setSearchInput(value);
+
+    if (value.length > 0) {
+      const matches = locations.filter((loc) =>
+        loc.name.toLowerCase().includes(value.toLowerCase())
+      );
+      setSuggestions(matches);
     } else {
-      alert("Location not found!");
+      setSuggestions([]);
     }
+  };
+
+  // Handle when user selects a suggestion
+  const handleSuggestionClick = (loc) => {
+    setSelected(loc);
+    setSearchInput(loc.name);
+    setSuggestions([]);
   };
 
   return (
@@ -80,17 +93,47 @@ const Home = () => {
           <p className="enter">
             Enter a name to get an image and the fastest route
           </p>
-          <div className="search-container">
+          <div className="search-container" style={{ position: "relative" }}>
             <input
               type="text"
               className="search-bar"
               value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
+              onChange={handleInputChange}
               placeholder="Search location..."
             />
-            <button className="search-button" onClick={handleSearch}>
-              Search
-            </button>
+            {/* Suggestions dropdown */}
+            {suggestions.length > 0 && (
+              <ul
+                style={{
+                  position: "absolute",
+                  top: "100%",
+                  left: 0,
+                  right: 0,
+                  background: "white",
+                  border: "1px solid #ddd",
+                  maxHeight: "150px",
+                  overflowY: "auto",
+                  zIndex: 1000,
+                  listStyle: "none",
+                  padding: 0,
+                  margin: 0,
+                }}
+              >
+                {suggestions.map((loc, i) => (
+                  <li
+                    key={i}
+                    onClick={() => handleSuggestionClick(loc)}
+                    style={{
+                      padding: "8px",
+                      cursor: "pointer",
+                      borderBottom: "1px solid #eee",
+                    }}
+                  >
+                    {loc.name}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </section>
@@ -101,25 +144,24 @@ const Home = () => {
             <MyMap
               locations={locations}
               setSelected={setSelected}
-              selectedLocation={selected} // 🔹 pass the selected location from search
+              selectedLocation={selected}
             />
           </div>
-          <div className="vector-step">
-            {/* <div className="location-details">
-              {selected ? (
-                <>
-                  <h2>{selected.name}</h2>
-                  <img
-                    src={`/images/${selected.name}.jpg`}
-                    alt={selected.name}
-                  />
-                  <p>Details about {selected.name} go here.</p>
-                </>
-              ) : (
-                <p>Click a marker or search to see details here.</p>
-              )}
-            </div> */}
-          </div>
+          {/* <div className="vector-step">
+            {selected ? (
+              <div className="location-details">
+                <h2>{selected.name}</h2>
+                <img
+                  src={`/images/${selected.name}.jpg`}
+                  alt={selected.name}
+                  style={{ maxWidth: "100%", borderRadius: "8px" }}
+                />
+                <p>Details about {selected.name} go here.</p>
+              </div>
+            ) : (
+              <p>Click a marker or search to see details here.</p>
+            )}
+          </div> */}
         </div>
       </section>
 
