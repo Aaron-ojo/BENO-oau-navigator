@@ -59,15 +59,16 @@ function About() {
           <p className="names">Abiodun Oluwatimilehin Oluwole</p>
 
           <p className="names">Fagbohun Oluwatunmise Ayanfeoluwa</p>
+
+          <a href="mailto: ojoaaron93@gmail.com" className="contact">
+            Contact
+          </a>
         </div>
       </section>
 
       <footer>
         <div className="footer">
           <p className="designed">DESIGNED BY PART 2, GROUP 16 SWEP STUDENTS</p>
-          <a href="mailto: ojoaaron93@gmail.com" className="contact">
-            Contact
-          </a>
         </div>
       </footer>
     </main>

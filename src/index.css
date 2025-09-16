@@ -31,12 +31,12 @@ html, body {
 .header-logo {
   width: 60px;
   height: 60px;
-  margin-left: 70px;
+  margin-left: 30px;
 }
 
 .logo-title {
   color: white;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 500;
   margin-left: 20px;
 }
@@ -272,11 +272,13 @@ html, body {
 }
 
 .contact{
-  color: white;
+  color: #C99A2E;
   text-decoration: none;
   font-weight: 500;
   font-size: 1.2rem;
-  margin-left: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .contact:hover {
   color: gray;
