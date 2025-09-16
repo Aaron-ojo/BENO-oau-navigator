@@ -29,24 +29,38 @@ const oauBounds = [
 const Routing = ({ userLocation, destination }) => {
   const map = useMap();
   const routingControlRef = useRef(null);
+  const debounceTimer = useRef(null);
 
   useEffect(() => {
-    if (userLocation && destination) {
-      if (routingControlRef.current) {
-        map.removeControl(routingControlRef.current);
-      }
+    if (!destination || !userLocation) return;
 
-      routingControlRef.current = L.Routing.control({
-        waypoints: [
-          L.latLng(userLocation.lat, userLocation.lng),
-          L.latLng(destination.lat, destination.lng),
-        ],
-        lineOptions: { styles: [{ color: "blue", weight: 5 }] },
-        addWaypoints: false,
-        routeWhileDragging: false,
-        showAlternatives: false,
-      }).addTo(map);
+    // Clear previous debounce
+    if (debounceTimer.current) {
+      clearTimeout(debounceTimer.current);
     }
+
+    debounceTimer.current = setTimeout(() => {
+      if (!routingControlRef.current) {
+        // Create route first time
+        routingControlRef.current = L.Routing.control({
+          waypoints: [
+            L.latLng(userLocation.lat, userLocation.lng),
+            L.latLng(destination.lat, destination.lng),
+          ],
+          lineOptions: { styles: [{ color: "blue", weight: 5 }] },
+          addWaypoints: false,
+          routeWhileDragging: false,
+          showAlternatives: false,
+        }).addTo(map);
+      } else {
+        // Just update the first waypoint (user's location)
+        let waypoints = routingControlRef.current.getWaypoints();
+        waypoints[0].latLng = L.latLng(userLocation.lat, userLocation.lng);
+        routingControlRef.current.setWaypoints(waypoints);
+      }
+    }, 3000); // update every 3s
+
+    return () => clearTimeout(debounceTimer.current);
   }, [userLocation, destination, map]);
 
   return null;
