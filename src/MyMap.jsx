@@ -49,6 +49,7 @@ const Routing = ({ userLocation, destination }) => {
           ],
           lineOptions: { styles: [{ color: "blue", weight: 5 }] },
           addWaypoints: false,
+          draggableWaypoints: false, // ⬅️ disable marker dragging
           routeWhileDragging: false,
           showAlternatives: false,
         }).addTo(map);
