@@ -44,6 +44,7 @@ html, body {
 .navbar {
   display: flex;
   gap: 20px;
+  color: black;
 }
 
 .home-button,
@@ -248,10 +249,14 @@ html, body {
 }
 
 .team {
-  margin-top: 20px;
-  font-size: 2rem;
-  margin-left: 500px;
   color: #C99A2E;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .oau, .built {
