@@ -17,7 +17,7 @@ function About() {
           <p className="aabout">About this project</p>
           <p className="oau">
             OAU Campus Navigator helps new and direct-entry students quickly
-            locate lecture theatres with images and shortest routes.
+            locate lecture theatres.
           </p>
           <p className="built">
             Built by OAU students • 2025 • Motto: “For Learning and Culture”.
