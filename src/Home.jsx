@@ -89,18 +89,18 @@ const Home = () => {
             />
           </div>
 
-          <div className="vector-step">
-            {selected ? (
-              <div className="location-details">
-                <h2>{selected.name}</h2>
-                {/* ✅ removed inline styles */}
-                <img src={`/images/${selected.name}.jpg`} alt={selected.name} />
-                <p>Details about {selected.name} go here.</p>
-              </div>
-            ) : (
-              <p>Click a marker or search to see details here.</p>
-            )}
-          </div>
+          {/* <div className="vector-step"> */}
+          {/* {selected ? ( */}
+          {/* // <div className="location-details"> */}
+          {/* <h2>{selected.name}</h2> */}
+          {/* ✅ removed inline styles */}
+          {/* <img src={`/images/${selected.name}.jpg`} alt={selected.name} /> */}
+          {/* <p>Details about {selected.name} go here.</p> */}
+          {/* </div> */}
+          {/* ) : ( */}
+          {/* <p>Click a marker or search to see details here.</p> */}
+          {/* )} */}
+          {/* </div> */}
         </div>
       </section>
 
