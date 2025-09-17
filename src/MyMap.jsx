@@ -19,49 +19,51 @@ const userIcon = new L.Icon({
   popupAnchor: [0, -32],
 });
 
+// Haversine formula (distance in meters)
+const getDistance = (lat1, lon1, lat2, lon2) => {
+  const R = 6371e3; // metres
+  const φ1 = (lat1 * Math.PI) / 180;
+  const φ2 = (lat2 * Math.PI) / 180;
+  const Δφ = ((lat2 - lat1) * Math.PI) / 180;
+  const Δλ = ((lon2 - lon1) * Math.PI) / 180;
+
+  const a =
+    Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+    Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return R * c; // in meters
+};
+
 // OAU boundaries
 const oauBounds = [
   [7.49, 4.515],
   [7.525, 4.535],
 ];
 
-// Routing component (updates line when userLocation changes)
+// Routing component
 const Routing = ({ userLocation, destination }) => {
   const map = useMap();
   const routingControlRef = useRef(null);
-  const debounceTimer = useRef(null);
 
   useEffect(() => {
-    if (!destination || !userLocation) return;
-
-    // Clear previous debounce
-    if (debounceTimer.current) {
-      clearTimeout(debounceTimer.current);
-    }
-
-    debounceTimer.current = setTimeout(() => {
-      if (!routingControlRef.current) {
-        // Create route first time
-        routingControlRef.current = L.Routing.control({
-          waypoints: [
-            L.latLng(userLocation.lat, userLocation.lng),
-            L.latLng(destination.lat, destination.lng),
-          ],
-          lineOptions: { styles: [{ color: "blue", weight: 5 }] },
-          addWaypoints: false,
-          draggableWaypoints: false, // ⬅️ disable marker dragging
-          routeWhileDragging: false,
-          showAlternatives: false,
-        }).addTo(map);
-      } else {
-        // Just update the first waypoint (user's location)
-        let waypoints = routingControlRef.current.getWaypoints();
-        waypoints[0].latLng = L.latLng(userLocation.lat, userLocation.lng);
-        routingControlRef.current.setWaypoints(waypoints);
+    if (userLocation && destination) {
+      if (routingControlRef.current) {
+        map.removeControl(routingControlRef.current);
       }
-    }, 3000); // update every 3s
 
-    return () => clearTimeout(debounceTimer.current);
+      routingControlRef.current = L.Routing.control({
+        waypoints: [
+          L.latLng(userLocation.lat, userLocation.lng),
+          L.latLng(destination.lat, destination.lng),
+        ],
+        lineOptions: { styles: [{ color: "blue", weight: 5 }] },
+        addWaypoints: false,
+        draggableWaypoints: false,
+        routeWhileDragging: false,
+        showAlternatives: false,
+      }).addTo(map);
+    }
   }, [userLocation, destination, map]);
 
   return null;
@@ -70,36 +72,74 @@ const Routing = ({ userLocation, destination }) => {
 const MyMap = ({ locations, setSelected, selectedLocation }) => {
   const [userLocation, setUserLocation] = useState(null);
   const [destination, setDestination] = useState(null);
+  const [distance, setDistance] = useState(null);
+  const [nearestLocation, setNearestLocation] = useState(null);
   const markerRefs = useRef({});
 
-  // Continuously track user location
+  useEffect(() => {
+    if (userLocation) {
+      let closest = null;
+      let minDist = Infinity;
+
+      locations.forEach((loc) => {
+        const dist = getDistance(
+          userLocation.lat,
+          userLocation.lng,
+          loc.lat,
+          loc.lng
+        );
+        if (dist < minDist) {
+          minDist = dist;
+          closest = loc;
+        }
+      });
+
+      if (minDist < 50) {
+        setNearestLocation(closest);
+      } else {
+        setNearestLocation(null);
+      }
+    }
+  }, [userLocation, locations]);
+
+  // Track user location
   useEffect(() => {
     if (navigator.geolocation) {
       const watchId = navigator.geolocation.watchPosition(
         (pos) => {
-          setUserLocation({
+          const newLocation = {
             lat: pos.coords.latitude,
             lng: pos.coords.longitude,
-          });
+          };
+          setUserLocation(newLocation);
+
+          if (destination) {
+            const d = getDistance(
+              newLocation.lat,
+              newLocation.lng,
+              destination.lat,
+              destination.lng
+            );
+            setDistance((d / 1000).toFixed(2)); // km
+          }
         },
         (err) => {
           console.error("Geolocation error:", err);
           alert("Unable to get precise location. Using default location.");
-          setUserLocation({ lat: 7.4985, lng: 4.5222 }); // fallback
+          setUserLocation({ lat: 7.4985, lng: 4.5222 });
         },
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
       );
 
-      // cleanup watcher on unmount
       return () => navigator.geolocation.clearWatch(watchId);
     }
-  }, []);
+  }, [destination]);
 
-  // Open marker popup automatically when location selected from search
+  // Auto-open selected location popup
   useEffect(() => {
     if (selectedLocation && markerRefs.current[selectedLocation.name]) {
       markerRefs.current[selectedLocation.name].openPopup();
-      setDestination(selectedLocation); // set route
+      setDestination(selectedLocation);
     }
   }, [selectedLocation]);
 
@@ -114,10 +154,26 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {/* User live location marker */}
+      {/* User location */}
       {userLocation && (
-        <Marker position={userLocation} icon={userIcon}>
-          <Popup>You are here 📍</Popup>
+        <Marker
+          position={userLocation}
+          icon={userIcon}
+          ref={(ref) => {
+            if (ref) {
+              setTimeout(() => ref.openPopup(), 200);
+            }
+          }}
+        >
+          <Popup>
+            {nearestLocation
+              ? `You are at ${nearestLocation.name}.`
+              : "You are here 📍"}
+            <br />
+            {destination
+              ? `Distance to ${destination.name}: ${distance} km`
+              : "No destination selected"}
+          </Popup>
         </Marker>
       )}
 
@@ -131,7 +187,7 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
           }}
           eventHandlers={{
             click: () => {
-              setDestination({ lat: loc.lat, lng: loc.lng });
+              setDestination({ lat: loc.lat, lng: loc.lng, name: loc.name });
               setSelected(loc);
             },
           }}
@@ -140,7 +196,7 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
             {loc.name} <br />
             <button
               onClick={() => {
-                setDestination(loc);
+                setDestination({ lat: loc.lat, lng: loc.lng, name: loc.name });
                 setSelected(loc);
               }}
             >
@@ -150,7 +206,6 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
         </Marker>
       ))}
 
-      {/* Dynamic route */}
       {userLocation && destination && (
         <Routing userLocation={userLocation} destination={destination} />
       )}

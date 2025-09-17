@@ -54,6 +54,24 @@ const locations = [
     lat: 7.517916631842728,
     lng: 4.521314537339125,
   },
+  { name: "Incubation center", lat: 7.52241977833374, lng: 4.553433449643548 },
+  { name: "Senate Building", lat: 7.518799463479474, lng: 4.524500317728673 },
+  {
+    name: "Faculty of Technology",
+    lat: 7.517840165720766,
+    lng: 4.528245075979342,
+  },
+  {
+    name: "ETF lecture theatre",
+    lat: 7.515670291325025,
+    lng: 4.530744894531347,
+  },
+  {
+    name: "Oau conference and guest houses",
+    lat: 7.52508606618523,
+    lng: 4.5300909894976495,
+  },
+  { name: "New market", lat: 7.516754605626839, lng: 4.513604615185045 },
 ];
 
 const Home = () => {
