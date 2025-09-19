@@ -156,15 +156,7 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
 
       {/* User location */}
       {userLocation && (
-        <Marker
-          position={userLocation}
-          icon={userIcon}
-          ref={(ref) => {
-            if (ref) {
-              setTimeout(() => ref.openPopup(), 200);
-            }
-          }}
-        >
+        <Marker position={userLocation} icon={userIcon}>
           <Popup>
             {nearestLocation
               ? `You are at ${nearestLocation.name}.`
@@ -193,14 +185,27 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
           }}
         >
           <Popup>
-            {loc.name} <br />
+            <h3>{loc.name}</h3>
+            {loc.image && (
+              <img
+                src={`/images/${loc.image}`}
+                alt={loc.name}
+                style={{
+                  width: "150px",
+                  height: "auto",
+                  borderRadius: "8px",
+                  marginBottom: "5px",
+                }}
+              />
+            )}
+            <br />
             <button
               onClick={() => {
                 setDestination({ lat: loc.lat, lng: loc.lng, name: loc.name });
                 setSelected(loc);
               }}
             >
-              Go Here 🚶
+              Your destination
             </button>
           </Popup>
         </Marker>

@@ -44,7 +44,6 @@ html, body {
 .navbar {
   display: flex;
   gap: 20px;
-  color: black;
 }
 
 .home-button,

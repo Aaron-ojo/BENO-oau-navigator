@@ -7,7 +7,12 @@ import Search from "./search"; // ✅ using the Search component
 const locations = [
   { name: "OAU-MAIN-GATE", lat: 7.498513922395018, lng: 4.52221698742415 },
   { name: "AmphiTheatre", lat: 7.519538704610767, lng: 4.522156103235021 },
-  { name: "Oduduwa Hall", lat: 7.51897059743468, lng: 4.52207138194439 },
+  {
+    name: "Oduduwa Hall",
+    lat: 7.51897059743468,
+    lng: 4.52207138194439,
+    image: "oduduwahall.jpg",
+  },
   { name: "FTLT", lat: 7.519508586695006, lng: 4.528965994339157 },
   { name: "1000seater LT", lat: 7.521059778997691, lng: 4.519779672300961 },
   { name: "BOOC", lat: 7.518997934000816, lng: 4.525539350861695 },
