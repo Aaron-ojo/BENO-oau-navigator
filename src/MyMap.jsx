@@ -195,6 +195,7 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
                   height: "auto",
                   borderRadius: "8px",
                   marginBottom: "5px",
+                  zoom: "1.5",
                 }}
               />
             )}
