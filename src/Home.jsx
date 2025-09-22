@@ -79,7 +79,12 @@ const locations = [
     lat: 7.521633148135438,
     lng: 4.520308416478868,
   },
-  { name: "Moremi Hall", lat: 7.520474506412491, lng: 4.520445893385167 },
+  {
+    name: "Moremi Hall",
+    lat: 7.520474506412491,
+    lng: 4.520445893385167,
+    imgage: "Moremi.jpg",
+  },
   { name: "Mozambique Hall", lat: 7.522542922670838, lng: 4.51380585231083 },
   {
     name: "Music Department",
@@ -137,6 +142,16 @@ const locations = [
     lng: 4.5300909894976495,
   },
   { name: "New market", lat: 7.516754605626839, lng: 4.513604615185045 },
+  {
+    name: "Oaks park researcher lodge",
+    lat: 7.518327321911296,
+    lng: 4.530851941028959,
+  },
+  {
+    name: "Africa Centre of Excellence",
+    lat: 7.518220955891449,
+    lng: 4.5300258207349495,
+  },
 ];
 
 const Home = () => {

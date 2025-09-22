@@ -73,6 +73,7 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
   const [userLocation, setUserLocation] = useState(null);
   const [destination, setDestination] = useState(null);
   const [distance, setDistance] = useState(null);
+  const [time, setTime] = useState(null); // ⏱ new state for estimated time
   const [nearestLocation, setNearestLocation] = useState(null);
   const markerRefs = useRef({});
 
@@ -120,7 +121,15 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
               destination.lat,
               destination.lng
             );
-            setDistance((d / 1000).toFixed(2)); // km
+            const distKm = d / 1000;
+            setDistance(distKm.toFixed(2)); // km
+
+            // 🚶 Assume walking speed = 5 km/h
+            const walkingSpeed = 5; // km/h
+            const timeHours = distKm / walkingSpeed;
+            const timeMinutes = Math.round(timeHours * 60);
+
+            setTime(timeMinutes);
           }
         },
         (err) => {
@@ -162,9 +171,15 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
               ? `You are at ${nearestLocation.name}.`
               : "You are here 📍"}
             <br />
-            {destination
-              ? `Distance to ${destination.name}: ${distance} km`
-              : "No destination selected"}
+            {destination ? (
+              <>
+                Distance to {destination.name}: {distance} km
+                <br />
+                Estimated time: {time} mins ⏱
+              </>
+            ) : (
+              "No destination selected"
+            )}
           </Popup>
         </Marker>
       )}
@@ -181,10 +196,14 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
             click: () => {
               setDestination({ lat: loc.lat, lng: loc.lng, name: loc.name });
               setSelected(loc);
+              if (markerRefs.current[loc.name]) {
+                markerRefs.current[loc.name].openPopup();
+              }
             },
           }}
         >
-          <Popup>
+          {/* Destination popup stays open */}
+          <Popup autoClose={false} closeOnClick={false}>
             <h3>{loc.name}</h3>
             {loc.image && (
               <img
@@ -195,8 +214,15 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
                   height: "auto",
                   borderRadius: "8px",
                   marginBottom: "5px",
-                  zoom: "1.5",
+                  transition: "transform 0.3s ease", // smooth animation
+                  cursor: "pointer",
                 }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.transform = "scale(1.5)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.transform = "scale(1)")
+                }
               />
             )}
             <br />
@@ -204,6 +230,9 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
               onClick={() => {
                 setDestination({ lat: loc.lat, lng: loc.lng, name: loc.name });
                 setSelected(loc);
+                if (markerRefs.current[loc.name]) {
+                  markerRefs.current[loc.name].openPopup();
+                }
               }}
             >
               Your destination
