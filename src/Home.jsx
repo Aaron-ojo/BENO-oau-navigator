@@ -13,7 +13,12 @@ const locations = [
     lng: 4.52207138194439,
     image: "oduduwahall.jpg",
   },
-  { name: "FTLT", lat: 7.519508586695006, lng: 4.528965994339157 },
+  {
+    name: "FTLT",
+    lat: 7.519508586695006,
+    lng: 4.528965994339157,
+    image: "FTLT.jpg",
+  },
   { name: "1000seater LT", lat: 7.521059778997691, lng: 4.519779672300961 },
   {
     name: "BOOC",
