@@ -245,6 +245,7 @@ html, body {
   text-decoration: underline;
   font-size: 2rem;
   padding: 10px;
+  color: #C99A2E;
 }
 
 .team {
@@ -262,6 +263,7 @@ html, body {
   font-size: 1.2rem;
   margin-top: 10px;
   padding: 10px;
+  color: #333;
 }
 
 .names{
@@ -277,7 +279,7 @@ html, body {
 
 .contact{
   color: #C99A2E;
-  text-decoration: none;
+  text-decoration: underline;
   font-weight: 500;
   font-size: 1.2rem;
   display: flex;

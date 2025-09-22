@@ -16,8 +16,13 @@ function About() {
         <div className="details">
           <p className="aabout">About this project</p>
           <p className="oau">
-            OAU Campus Navigator helps new and direct-entry students quickly
-            locate lecture theatres.
+            This project is an interactive campus navigation map for Obafemi
+            Awolowo University. It allows users to view key campus locations,
+            see their live position, and get walking routes with distance and
+            estimated travel time. Users can also view images of destinations
+            for easier recognition. The map updates dynamically as the user
+            moves, ensuring real-time navigation. It is built with React,
+            Leaflet, and geolocation services for accuracy and ease of use.
           </p>
           <p className="built">
             Built by OAU students • 2025 • Motto: “For Learning and Culture”.
