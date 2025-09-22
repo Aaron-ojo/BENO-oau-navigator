@@ -147,6 +147,11 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
   // Auto-open selected location popup
   useEffect(() => {
     if (selectedLocation && markerRefs.current[selectedLocation.name]) {
+      // Close all other popups first
+      Object.values(markerRefs.current).forEach((marker) =>
+        marker.closePopup()
+      );
+
       markerRefs.current[selectedLocation.name].openPopup();
       setDestination(selectedLocation);
     }
@@ -194,15 +199,20 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
           }}
           eventHandlers={{
             click: () => {
+              // ✅ Close all other popups first
+              Object.values(markerRefs.current).forEach((marker) =>
+                marker.closePopup()
+              );
+
               setDestination({ lat: loc.lat, lng: loc.lng, name: loc.name });
               setSelected(loc);
+
               if (markerRefs.current[loc.name]) {
                 markerRefs.current[loc.name].openPopup();
               }
             },
           }}
         >
-          {/* Destination popup stays open */}
           <Popup autoClose={false} closeOnClick={false}>
             <h3>{loc.name}</h3>
             {loc.image && (
@@ -214,7 +224,7 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
                   height: "auto",
                   borderRadius: "8px",
                   marginBottom: "5px",
-                  transition: "transform 0.3s ease", // smooth animation
+                  transition: "transform 0.3s ease",
                   cursor: "pointer",
                 }}
                 onMouseEnter={(e) =>
@@ -228,8 +238,14 @@ const MyMap = ({ locations, setSelected, selectedLocation }) => {
             <br />
             <button
               onClick={() => {
+                // ✅ Also close all other popups when setting destination
+                Object.values(markerRefs.current).forEach((marker) =>
+                  marker.closePopup()
+                );
+
                 setDestination({ lat: loc.lat, lng: loc.lng, name: loc.name });
                 setSelected(loc);
+
                 if (markerRefs.current[loc.name]) {
                   markerRefs.current[loc.name].openPopup();
                 }
