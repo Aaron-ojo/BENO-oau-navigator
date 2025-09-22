@@ -15,13 +15,24 @@ const locations = [
   },
   { name: "FTLT", lat: 7.519508586695006, lng: 4.528965994339157 },
   { name: "1000seater LT", lat: 7.521059778997691, lng: 4.519779672300961 },
-  { name: "BOOC", lat: 7.518997934000816, lng: 4.525539350861695 },
+  {
+    name: "BOOC",
+    lat: 7.518997934000816,
+    lng: 4.525539350861695,
+    image: "BOOC.jpg",
+  },
   {
     name: "Hezekiah Oluwasanmi Library",
     lat: 7.519853126080705,
     lng: 4.5229168937401765,
+    image: "Library.jpg",
   },
-  { name: "ICT center", lat: 7.518714884701749, lng: 4.5293434012812925 },
+  {
+    name: "ICT center",
+    lat: 7.518714884701749,
+    lng: 4.5293434012812925,
+    image: "ICT.jpg",
+  },
   { name: "Computer Building", lat: 7.517959229104742, lng: 4.528684591341449 },
   {
     name: "Admin Extension",
@@ -47,15 +58,30 @@ const locations = [
     lng: 4.516724095589321,
     image: "Alumni.jpg",
   },
-  { name: "Angola Hall", lat: 7.522289754512512, lng: 4.512571629972128 },
+  {
+    name: "Angola Hall",
+    lat: 7.522289754512512,
+    lng: 4.512571629972128,
+    image: "Angola.jpg",
+  },
   {
     name: "Architecture",
     lat: 7.521401747983368,
     lng: 4.518321226523513,
     image: "Architecture.jpg",
   },
-  { name: "Awolowo Hall", lat: 7.521293784505835, lng: 4.515697391207035 },
-  { name: "DSA", lat: 7.522119623532502, lng: 4.527476518327954 },
+  {
+    name: "Awolowo Hall",
+    lat: 7.521293784505835,
+    lng: 4.515697391207035,
+    image: "Awolowo.jpg",
+  },
+  {
+    name: "DSA",
+    lat: 7.522119623532502,
+    lng: 4.527476518327954,
+    image: "DSA.jpg",
+  },
   {
     name: "FBLT",
     lat: 7.522043678345562,
@@ -78,6 +104,7 @@ const locations = [
     name: "Ican Lecture theatre",
     lat: 7.521633148135438,
     lng: 4.520308416478868,
+    image: "Ican.jpg",
   },
   {
     name: "Moremi Hall",
@@ -85,14 +112,24 @@ const locations = [
     lng: 4.520445893385167,
     imgage: "Moremi.jpg",
   },
-  { name: "Mozambique Hall", lat: 7.522542922670838, lng: 4.51380585231083 },
+  {
+    name: "Mozambique Hall",
+    lat: 7.522542922670838,
+    lng: 4.51380585231083,
+    image: "Mozambique.jpg",
+  },
   {
     name: "Music Department",
     lat: 7.521855605428185,
     lng: 4.522125881546344,
     image: "MusicDepartment.jpg",
   },
-  { name: "Postgraduate Hall", lat: 7.522032649711087, lng: 4.517030779697262 },
+  {
+    name: "Postgraduate Hall",
+    lat: 7.522032649711087,
+    lng: 4.517030779697262,
+    image: "PGhall.jpg",
+  },
   {
     name: "Spider",
     lat: 7.522910396748227,
@@ -135,6 +172,7 @@ const locations = [
     name: "ETF lecture theatre",
     lat: 7.515670291325025,
     lng: 4.530744894531347,
+    image: "ETF.jpg",
   },
   {
     name: "Oau conference and guest houses",
