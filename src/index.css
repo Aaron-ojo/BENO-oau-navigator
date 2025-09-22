@@ -111,6 +111,10 @@ html, body {
 
 }
 
+.suggestions-list:hover{
+  cursor: pointer;
+}
+
 
 .search-button:hover {
   background-color: wheat;

@@ -103,7 +103,7 @@ const locations = [
     name: "Health Center",
     lat: 7.520524378773302,
     lng: 4.516394080283482,
-    image: "HealthCenter.jpg",
+    image: "Healthcenter.jpg",
   },
   {
     name: "Ican Lecture theatre",
@@ -115,7 +115,7 @@ const locations = [
     name: "Moremi Hall",
     lat: 7.520474506412491,
     lng: 4.520445893385167,
-    imgage: "Moremi.jpg",
+    imgage: "Moremihall.jpg",
   },
   {
     name: "Mozambique Hall",
@@ -127,7 +127,7 @@ const locations = [
     name: "Music Department",
     lat: 7.521855605428185,
     lng: 4.522125881546344,
-    image: "MusicDepartment.jpg",
+    image: "Music.jpg",
   },
   {
     name: "Postgraduate Hall",
