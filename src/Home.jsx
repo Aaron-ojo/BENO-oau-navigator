@@ -19,7 +19,12 @@ const locations = [
     lng: 4.528965994339157,
     image: "FTLT.jpg",
   },
-  { name: "1000seater LT", lat: 7.521059778997691, lng: 4.519779672300961 },
+  {
+    name: "1000seater LT",
+    lat: 7.521059778997691,
+    lng: 4.519779672300961,
+    image: "1000seater.jpg",
+  },
   {
     name: "BOOC",
     lat: 7.518997934000816,
@@ -115,7 +120,7 @@ const locations = [
     name: "Moremi Hall",
     lat: 7.520474506412491,
     lng: 4.520445893385167,
-    imgage: "Moremihall.jpg",
+    image: "Moremi.jpg",
   },
   {
     name: "Mozambique Hall",
