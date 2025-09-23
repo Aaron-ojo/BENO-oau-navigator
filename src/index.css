@@ -47,7 +47,7 @@ html, body {
 }
 
 .home-button,
-.about-button,.faq-button {
+.about-button,.faq-button, .chatbot-button {
   color: #F6F7FB;
   text-decoration: none;
   font-weight: 500;
@@ -56,7 +56,7 @@ html, body {
 }
 
 .home-button:hover,
-.about-button:hover,.faq-button:hover {
+.about-button:hover,.faq-button:hover, .chatbot-button:hover {
   color: gray;
 }
 
@@ -446,3 +446,62 @@ html, body {
   background-color: #1e40af; /* darker blue */
 }
 
+
+.chatbot-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* full screen */
+  width: 100%;
+  background: #f8f9fa;
+  font-family: Arial, sans-serif;
+}
+
+.chat-window {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.message {
+  max-width: 70%;
+  margin-bottom: 12px;
+  padding: 10px 15px;
+  border-radius: 12px;
+}
+
+.message.user {
+  background: #007bff;
+  color: white;
+  margin-left: auto;
+}
+
+.message.bot {
+  background: #e9ecef;
+  color: #333;
+  margin-right: auto;
+}
+
+.chat-input {
+  display: flex;
+  padding: 15px;
+  border-top: 1px solid #ccc;
+  background: white;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+
+.chat-input button {
+  margin-left: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}

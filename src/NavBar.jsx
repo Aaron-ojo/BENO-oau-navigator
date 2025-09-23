@@ -7,6 +7,10 @@ function NavBar() {
         Home
       </NavLink>
 
+      <NavLink to="/chatbot" className="chatbot-button">
+        Chatbot
+      </NavLink>
+
       <NavLink to="/about" className="about-button">
         About
       </NavLink>
