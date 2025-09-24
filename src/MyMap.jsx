@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import locations from "./Location"; // ✅ import locations
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";

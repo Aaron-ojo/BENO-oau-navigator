@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { askGemini } from "./geminiService"; // ✅ your Gemini API helper
+import locations from "./Location"; // ✅ matches your file name
+import { askGemini } from "./geminiService"; // Gemini API helper
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([
@@ -10,12 +11,52 @@ const Chatbot = () => {
   ]);
   const [input, setInput] = useState("");
 
+  // ✅ helper to check if user question matches any location
+  const findLocation = (query) => {
+    const lowerQuery = query.toLowerCase();
+    return locations.find((loc) => lowerQuery.includes(loc.name.toLowerCase()));
+  };
+
   const handleSend = async () => {
     if (!input.trim()) return;
 
     const userMessage = { sender: "user", text: input };
     setMessages((prev) => [...prev, userMessage]);
 
+    // ✅ Step 1: check if input matches a known location
+    const locationMatch = findLocation(input);
+
+    if (locationMatch) {
+      const reply = (
+        <div>
+          <p>
+            📍 <b>{locationMatch.name}</b>
+          </p>
+          <p>{locationMatch.description}</p>
+          <p>
+            Coordinates: ({locationMatch.lat}, {locationMatch.lng})
+          </p>
+          {locationMatch.image && (
+            <img
+              src={locationMatch.image}
+              alt={locationMatch.name}
+              style={{
+                width: "100%",
+                maxWidth: "250px",
+                borderRadius: "8px",
+                marginTop: "8px",
+              }}
+            />
+          )}
+        </div>
+      );
+
+      setMessages((prev) => [...prev, { sender: "bot", text: reply }]);
+      setInput("");
+      return;
+    }
+
+    // ✅ Step 2: otherwise, fallback to Gemini
     try {
       const botReply = await askGemini(input);
       setMessages((prev) => [...prev, { sender: "bot", text: botReply }]);
